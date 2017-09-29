@@ -106,6 +106,7 @@
         <h1 id="Home-Energy-Monitor"><a href="#Home-Energy-Monitor" class="headerlink" title="Home Energy Monitor"></a>Home Energy Monitor</h1><p>I had recently received my open energy monitor package. I unwrapped an EmonTX module, a base station module and the EmonTH plus some accessories.</p>
 <p>After connecting everything and setting up the Raspberry Pi the system was running without any problems. The only issue I had was that the Raspian was outdated. I decided to give it a try and setup the energy monitor on a stock Raspian Stretch image. This also allowed me to re-configure the emon software to the parts that I actually need and want.</p>
 <p>The goal was to get to a clean setup with Raspian Stretch, node-red, influxdb and grafana.</p>
+<img src="/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/EmonPiArchitecture.png" alt="[EmonPiArchitecture.png]" title="[EmonPiArchitecture.png]">
 <h1 id="Let’s-get-started"><a href="#Let’s-get-started" class="headerlink" title="Let’s get started"></a>Let’s get started</h1><h2 id="Raspian"><a href="#Raspian" class="headerlink" title="Raspian"></a>Raspian</h2><p>Download and install the Lite version of Raspian to a micro SD card. I used an 8 GB card, but the bigger the better.</p>
 <p>Enable SSH.<br>Enable serial hardware, but do not enable the serial console.</p>
 <h3 id="Install-influxdb"><a href="#Install-influxdb" class="headerlink" title="Install influxdb"></a>Install influxdb</h3><p>apt-get install influxdb-client influxdb-server</p>
@@ -139,7 +140,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/" data-id="cj8682ixr0000l00il53anefz" class="article-share-link">
+      <a data-url="http://yoursite.com/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/" data-id="cj86adh640000ex0i6qgeww8z" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
