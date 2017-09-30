@@ -6,7 +6,7 @@
   <title>Open energy monitor on Raspian Stretch | The Potato Connection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Home Energy MonitorI had recently received my open energy monitor package. I unwrapped an EmonTX module, a base station module and the EmonTH plus some accessories. After connecting everything and set">
-<meta name="keywords" content="raspberry,node-red,influxdb,grafana,stretch,emonhub,home monitoring">
+<meta name="keywords" content="raspberry,stretch,emonhub,grafana,influxdb,node-red,home monitoring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Open energy monitor on Raspian Stretch">
 <meta property="og:url" content="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/index.html">
@@ -14,7 +14,7 @@
 <meta property="og:description" content="Home Energy MonitorI had recently received my open energy monitor package. I unwrapped an EmonTX module, a base station module and the EmonTH plus some accessories. After connecting everything and set">
 <meta property="og:image" content="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/EmonPiArchitecture.png">
 <meta property="og:image" content="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/First%20Sauna%20Session%20Graph.png">
-<meta property="og:updated_time" content="2017-09-29T21:28:55.000Z">
+<meta property="og:updated_time" content="2017-09-30T05:16:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Open energy monitor on Raspian Stretch">
 <meta name="twitter:description" content="Home Energy MonitorI had recently received my open energy monitor package. I unwrapped an EmonTX module, a base station module and the EmonTH plus some accessories. After connecting everything and set">
@@ -127,7 +127,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O grafana_4.5.2_armhf.deb https://bintray.com/fg2it/deb/download_file?file_path=main%2Fg%2Fgrafana_4.5.2_armhf.deb</div></pre></td></tr></table></figure>
 <p>then run dpkg to install the downloaded .deb file.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dpkg -i grafana_4.5.2_armhf.deb</div></pre></td></tr></table></figure><br>In case the grafana service is not starting automatically at system boot, you can launch enable the server with the following command sequence:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo /bin/systemctl daemon-reload</div><div class="line">sudo systemctl enable grafana-server.service</div></pre></td></tr></table></figure>
-<h3 id="emonhub"><a href="#emonhub" class="headerlink" title="emonhub"></a>emonhub</h3><p>Now to the most interesting part. The emon base station came with the full system pre-configured. To get the system process messages sent from the various probes we need to install emonhub. Emonhub interprets data from the 433 MHz receiver and publishes the sensor messages to MQTT queues.</p>
+<h3 id="emonhub"><a href="#emonhub" class="headerlink" title="emonhub"></a>emonhub</h3><p>Now to the most interesting part. To get the system process messages sent from the various probes we need to install emonhub. Emonhub interprets data from the 433 MHz receiver and publishes the sensor messages to MQTT queues.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python-pip python-serial python-configobj git mosquitto</div><div class="line">sudo pip install paho-mqtt</div><div class="line">sudo pip install pydispatcher</div></pre></td></tr></table></figure>
 <p>It is recommended to turn off persistence in mosquitto. Edit the mosquitto.conf file and set “persistence” setting to false. Also define the location of the password file. Here is my complete <code>mosquitto.conf</code> file.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># Place your local configuration in /etc/mosquitto/conf.d/</div><div class="line">#</div><div class="line"># A full description of the configuration file is at</div><div class="line"># /usr/share/doc/mosquitto/examples/mosquitto.conf.example</div><div class="line"></div><div class="line">pid_file /var/run/mosquitto.pid</div><div class="line"></div><div class="line">persistence false</div><div class="line">persistence_location /var/lib/mosquitto/</div><div class="line"></div><div class="line">log_dest file /var/log/mosquitto/mosquitto.log</div><div class="line"></div><div class="line">include_dir /etc/mosquitto/conf.d</div><div class="line"></div><div class="line">password_file /etc/mosquitto/passwd</div><div class="line">allow_anonymous false</div></pre></td></tr></table></figure>
@@ -155,9 +155,13 @@
     
 
     <footer class="article-footer">
-      <a data-url="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/" data-id="cj86fh7sp0001bi0ixpbtb5pi" class="article-share-link">
+      <a data-url="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/" data-id="cj86w94f40000hf0igikqnud7" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
+      
+        <a href="https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/#disqus_thread" class="article-comment-link">
+          <i class="fa fa-comment"></i> Comments
+        </a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emonhub/">emonhub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grafana/">grafana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/home-monitoring/">home monitoring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/influxdb/">influxdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-red/">node-red</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raspberry/">raspberry</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stretch/">stretch</a></li></ul>
@@ -171,6 +175,12 @@
   
 </article>
 
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 
 
 
@@ -229,7 +239,23 @@
         </div>
     </div>
   </div>
-  <footer class="blog-footer">
+  
+  <script>
+    var disqus_shortname = 'https-puskasusi-github-io';
+    
+    var disqus_url = 'https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  
+
+<footer class="blog-footer">
   <div class="container">
     <div id="footer-info" class="inner">
       &copy; 2017 Antti Puskasusi<br>
@@ -239,6 +265,20 @@
 </footer>
 
   
+<script>
+  var disqus_shortname = 'https-puskasusi-github-io';
+  
+  var disqus_url = 'https://puskasusi.github.io/2017/09/27/Open-energy-monitor-on-Raspian-Stretch/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
 
